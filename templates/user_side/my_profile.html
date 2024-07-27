@@ -1,0 +1,40 @@
+{% extends 'user_side/base.html' %}
+
+{% block body %}
+
+<div class="container mt-4">
+
+    {% for message in messages %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ message.tags|title }}</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+<div class="container profile-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="profile-card">
+                <h2 class="text-center">Profile</h2>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+                    <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                    <li class="list-group-item"><strong>Date Joined:</strong> {{ user.date_joined }}</li>
+                    <li class="list-group-item"><strong>Last Login:</strong> {{ user.last_login }}</li>
+                    <li class="list-group-item">
+                        <a href="{% url 'change_password' %}" class="btn btn-outline-danger w-100">Change Password</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

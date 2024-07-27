@@ -1,0 +1,51 @@
+{% extends 'user_side/base.html' %}
+
+{% block body %}
+
+<div class="container mt-4">
+
+    {% for message in messages %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ message.tags|title }}</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {% endfor %}
+</div>
+
+<!-- Todo List -->
+<div class="container mt-5">
+    <h2 class="text-center mb-5">{{ request.user.username }}'s Todos</h2>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            {% if todos %}
+            <ul class="list-group">
+                {% for todo in todos %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5>{{ todo.title }}</h5>
+                        <p>{{ todo.description }}</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'edit_todo' todo.id %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'delete_todo' todo.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-center">No todos available. <a href="">Add a todo</a></p>
+            {% endif %}
+            <br>
+            <a href="{% url 'add_todo' %}" class="btn btn-primary w-100">Add a Todo</a>
+            <br><br><br><br>
+            <br><br>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
